@@ -36,13 +36,11 @@ namespace detail
       exception_handler_base* next;
   };
 
-  namespace mpl = boost::mpl;
-
   template<class E, class Handler>
   struct exception_handler : exception_handler_base
   {
 #  if BOOST_WORKAROUND(BOOST_MSVC, <= 1300)
-      typedef typename mpl::if_<
+      typedef typename boost::mpl::if_<
           boost::is_pointer<E>, E, E const&
       >::type argument;
 #  else
